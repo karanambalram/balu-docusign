@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="af34709d-95c9-412c-b246-d2a760ccbc5a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="calculatorpracticeFlow_addition" doc:id="dd3aaca8-131d-4e79-8bc2-6e71fbe899e0" >
+		<set-variable value="#[attributes.queryParams.num1 as Number default 0]" doc:name="Setting num1" doc:id="3ee774d2-caea-47c4-9a4d-04c4555fedd2" variableName="num1"/>
+		<set-variable value="#[attributes.queryParams.num2 as Number default 0]" doc:name="Setting num2" doc:id="7ff5a895-b480-4d6f-a891-fe3938860b1b" variableName="num2"/>
+		<ee:transform doc:name="Transform Message" doc:id="a2154f97-be23-4b79-bc4e-be332f90aa34" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+   "Message" : "Result is " ++ (vars.num1 + vars.num2)
+ }]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="06debd8d-9017-4319-bfc0-5e08dbbb3925" />
+	</flow>
+	<flow name="calculatorpractice-implFlow_mutiply" doc:id="d0a8c5ca-4a49-4f4c-9f28-6968c7d26c1c" >
+		<set-variable value="#[attributes.queryParams.num1 as Number default 0]" doc:name="Set Variable" doc:id="ed2caf4c-9933-4b79-9fad-0041e75bc6bc" variableName="num1"/>
+		<set-variable value="#[attributes.queryParams.num2 as Number default 0]" doc:name="Set Variable" doc:id="6c5bf596-5a37-429c-9355-691d67a29acb" variableName="num2"/>
+		<ee:transform doc:name="Transform Message" doc:id="cbc72f17-c4e8-41ba-97a6-18f06d3d6a96" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+   "Message" : "Result is " ++ ((vars.num1) * (vars.num2))
+ }]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="46cf9b14-87b1-4557-85d5-14c19069f08c" />
+	</flow>
+	<flow name="calculatorpractice-implFlow_division" doc:id="214f91df-9216-493a-a653-ec23d7e896a8" >
+		<set-variable value="#[attributes.queryParams.num1 as Number default 1]" doc:name="Set Variable" doc:id="7e3fe54b-96f9-4a69-8e8a-94e3c1029307" variableName="num1"/>
+		<set-variable value="#[attributes.queryParams.num2 as Number default 1]" doc:name="Set Variable" doc:id="139491fe-d84d-4bdf-b7ee-a5cd3ac09c93" variableName="num2"/>
+		<ee:transform doc:name="Transform Message" doc:id="5fed34d4-7823-4086-9563-ea353955803e" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+   "Message" : "Result is " ++ (vars.num1 / vars.num2)
+ }]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="0389d945-329d-42b8-9acc-6db269938a8f" />
+	</flow>
+	<flow name="calculatorpractice-implFlow_sub" doc:id="6cafc095-c4b8-4804-b2ab-b60800f401c1" >
+		<set-variable value="#[attributes.queryParams.num1 as Number default 0]" doc:name="Set Variable" doc:id="c34b2c30-b063-4bf5-8612-6068b1119fff" variableName="num1"/>
+		<set-variable value="#[attributes.queryParams.num2 as Number default 0]" doc:name="Set Variable" doc:id="61a452f5-a40d-4cb2-91bb-737e1f8977e9" variableName="num2"/>
+		<ee:transform doc:name="Transform Message" doc:id="8d8bf6ce-a393-4e70-8e17-4100d8da39b8" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+   "Message" : "Result is " ++ (vars.num1 - vars.num2)
+ }]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="e753c2a4-d074-4a84-b8fe-255ab5268a04" />
+	</flow>
+</mule>

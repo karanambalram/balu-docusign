@@ -1,0 +1,37 @@
+#%RAML 1.0
+title: calcultorpractice
+version: v1
+mediaType: 
+- application/json
+traits:
+  error: !include errorreponse.raml
+  query: !include errorreponse.raml
+/addition:
+  get:
+    is: [error,query] 
+    responses:
+      200:
+        body:
+            example: !include Example/addition.json    
+/multiply:
+  get:
+    is: [error,query]
+    responses:
+      200:
+        body:
+            example: !include Example/multiply.json
+/division:
+  get:
+    is: [error,query]
+    responses:
+      200:
+        body:
+            example: !include Example/division.json    
+/sub:
+  get:
+    is: [error,query]
+    responses:
+      200:
+        body:
+            example: !include Example/sub.json
+                         
