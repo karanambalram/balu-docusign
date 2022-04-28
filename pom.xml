@@ -4,7 +4,7 @@
 
 	<groupId>com.mycompany</groupId>
 	<artifactId>calculatorpractice_balram</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>mule-application</packaging>
 
 	<name>calculatorpractice_balram</name>
@@ -18,6 +18,7 @@
 	</properties>
 
 	<build>
+		<finalName>${project.artifactId}.${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
